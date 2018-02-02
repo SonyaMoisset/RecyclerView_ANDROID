@@ -3,6 +3,8 @@ package com.example.android.recyclerview;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import java.util.LinkedList;
@@ -13,6 +15,9 @@ public class MainActivity extends AppCompatActivity {
     private final LinkedList<String> mWordList = new LinkedList<>();
     private int mCount = 0;
 
+    private RecyclerView mRecyclerView;
+    private WordListAdapter mAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,5 +27,10 @@ public class MainActivity extends AppCompatActivity {
             mWordList.addLast("Word " + mCount++);
             Log.d("WordList", mWordList.getLast());
         }
+
+        mRecyclerView = findViewById(R.id.recyclerview);
+        mAdapter = new WordListAdapter(this, mWordList);
+        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 }
